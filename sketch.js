@@ -4,14 +4,20 @@ const Engine= Matter.Engine;
 
 var engine , world;
 var box;
+var ground;
 function setup() {
   createCanvas(800,400);
   engine= Engine.create();
   world = engine.world ;
-
-  box= Bodies.rectangle(400,200,50,50)
+var box_options ={
+  restitution:0
+}
+  box= Bodies.circle(400,200,25,box_options)
   World.add(world,box)
 
+
+  ground = Bodies.rectangle(400,400,800,20,{isStatic:true});
+  World.add(world,ground);
 
 }
 
@@ -21,6 +27,8 @@ function draw() {
   console.log (box.position)
 var pos = box.position
 rectMode(CENTER)
-  rect(pos.x,pos.y,50,50);
+  circle(pos.x,pos.y,50);
+
+  rect(ground.position.x,ground.position.y,800,20)
 
 }
